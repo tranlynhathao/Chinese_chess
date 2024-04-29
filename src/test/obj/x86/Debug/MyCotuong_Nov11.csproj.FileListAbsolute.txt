@@ -1,0 +1,13 @@
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\bin\Debug\test1.exe.manifest
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\bin\Debug\test1.application
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\bin\Debug\test1.exe
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\bin\Debug\test1.pdb
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\obj\x86\Debug\test.CoTuongForm.resources
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\obj\x86\Debug\test.OptionsForm.resources
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\obj\x86\Debug\test.Properties.Resources.resources
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\obj\x86\Debug\MyCotuong_Nov11.csproj.GenerateResource.Cache
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\obj\x86\Debug\test1.exe.manifest
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\obj\x86\Debug\test1.application
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\obj\x86\Debug\test1.exe
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\obj\x86\Debug\test1.pdb
+C:\Users\Duy\Documents\Visual Studio 2010\Projects\test1\test1\obj\x86\Debug\MyCotuong_Nov11.csprojResolveAssemblyReference.cache
