@@ -24,7 +24,7 @@ namespace MyCoTuong
         private static int typeCoNhanh = 2;
         private static int typeCoChop = 3;
         private static int typeGiaoHuu = 4;
-        private static int unselected = -1; //quy ước không chọn là -1.
+        private static int unselected = -1;
         private static int noID = -1;
         #endregion
 

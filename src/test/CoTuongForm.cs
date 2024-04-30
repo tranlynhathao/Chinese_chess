@@ -116,10 +116,6 @@ namespace MyCoTuong
 
         private void pbBoard_Paint(object sender, PaintEventArgs e)
         {
-            /* 1. Chuẩn bị vẽ bàn cờ và các quân cờ
-             * 2. Highlight các vị trí nếu cần thiết
-             * 3. Nếu game không bị pause thì vẽ tất cả lên màn hình.
-             */
             try
             {
                 prepareBoard(e);
@@ -155,10 +151,6 @@ namespace MyCoTuong
 
         private void redTimer_Tick(object sender, EventArgs e)
         {
-            /* 1. Cập nhật thời gian ở đồng hồ theo chu kỳ
-             * 2. Nếu hết thời gian thì kết thúc game, cho biết người thắng cuộc.
-             * (Nếu trong chế độ chơi giao hữu - không tính giờ thì không kết thúc game).
-             */
             try
             {
                 if (GameConstants.Res_gameType != GameConstants.TypeGiaoHuu)
@@ -179,7 +171,6 @@ namespace MyCoTuong
         }
         private void blackTimer_Tick(object sender, EventArgs e)
         {
-            //Xem timer1_Tick
             try
             {
                 if (GameConstants.Res_gameType != GameConstants.TypeGiaoHuu)
@@ -205,7 +196,6 @@ namespace MyCoTuong
         {
             try
             {
-                //Chuyển đổi trạng thái nút: Start/Pause/Resume và trạng thái game tương ứng.
                 game.processPauseButton();
             }
             catch (Exception exp)
@@ -230,10 +220,6 @@ namespace MyCoTuong
 
         private void btNewGame_Click(object sender, EventArgs e)
         {
-            /*1. Khởi tạo game mới
-             *2. Thay đổi trạng thái nút Start
-             *3. Reset timer và các thông số liên quan
-             */
             try
             {
                 game = new Game(pbBoard, xqBoard, this);
