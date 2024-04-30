@@ -28,7 +28,6 @@ namespace MyCoTuong
 
         private int int_oldUnitID = GameConstants.NoID;
 
-        //Kiểm tra xem nước đi tiếp theo có hợp lệ?
         public virtual bool checkNextMove(Point currentPos, Point nextPos)
         {
             return true;
@@ -46,25 +45,20 @@ namespace MyCoTuong
         }
         protected void temporarilyPut(int x1, int y1, int x2, int y2)
         {
-            //Thử đặt quân cờ ở vị trí (x2, y2) xem có khiến mình bị thua hay không?
 
-            //Bỏ quân cờ hiện đang ở (x2, y2) (nếu có) ra ngoài.
             int_oldUnitID = Game.int_IDOnCoordinates[x2, y2];
             if (int_oldUnitID != -1)
             {
                 Game.unitOnBoard[int_oldUnitID].bo_isAlive = false;
             }
 
-            //Bỏ quân cờ này khỏi (x1, y1)
             Game.int_IDOnCoordinates[x1, y1] = GameConstants.NoID;
             this.pCurrentLocation = new Point(x2, y2);
 
-            //Ghi nhận quân cờ nảy ở (x2, y2)
             Game.int_IDOnCoordinates[x2, y2] = this.int_ID;
         }
         protected void rollBack(int x1, int y1, int x2, int y2)
         {
-            //Đặt quân cờ trở lại điểm (x1, y1). Đặt trả lại trạng thái quân cờ ở điểm (x2, y2).
             this.pCurrentLocation = new Point(x1, y1);
             Game.int_IDOnCoordinates[x1, y1] = this.int_ID;
             Game.int_IDOnCoordinates[x2, y2] = int_oldUnitID;

@@ -25,19 +25,12 @@ namespace MyCoTuong
         }
         public void drawXqBoardAndSetupIntersection(PaintEventArgs e)
         {
-            /*Vẽ bàn cờ. Gồm các công việc:
-             * 1. Thiết lập tọa độ cho các giao điểm
-             * 2. Vẽ các đường
-             */
             setCoordinates();
             drawXqBoardLines(e);
             drawLLine(e);
-            //drawChineseBoundary(e);
-
         }
         private void setCoordinates()
         {
-            //Đặt tọa độ các giao điểm trên bàn cờ dựa trên tọa độ thực tế.
             for (int i = 0; i < GameConstants.BoardWidth; i++)
             {
                 for (int j = 0; j < GameConstants.BoardHeight; j++)
@@ -48,7 +41,6 @@ namespace MyCoTuong
         }
         private void drawXqBoardLines(PaintEventArgs e)
         {
-            //Vẽ các đường trên bàn cờ
             e.Graphics.DrawLine(penRegular, pCoordinates[0, 0], pCoordinates[8, 0]);
             e.Graphics.DrawLine(penRegular, pCoordinates[0, 0], pCoordinates[0, 9]);
             e.Graphics.DrawLine(penRegular, pCoordinates[8, 0], pCoordinates[8, 9]);
@@ -77,7 +69,6 @@ namespace MyCoTuong
         }
         private void drawLLine(PaintEventArgs e)
         {
-            //Vẽ các đường chữ L ở vị trí của pháo và tốt
             for (int i = 0; i < 9; i += 2)
             {
                 if (i != 0)
@@ -119,7 +110,6 @@ namespace MyCoTuong
         }
         private void drawChineseBoundary(PaintEventArgs e)
         {
-            //Viết Sở hà- Hán giới
             string drawString = "楚河        漢界";
             Font drawFont = new Font("細明體_HKSCS", 25, FontStyle.Bold);
             StringFormat drawFormat = new StringFormat();
@@ -128,7 +118,6 @@ namespace MyCoTuong
         }
         public void drawUnits(PaintEventArgs e)
         {
-            //Hiện các quân cờ lên bàn cờ.
             for (int i = 0; i < 32; i++)
             {
                 Unit u = Game.unitOnBoard[i];
@@ -140,7 +129,6 @@ namespace MyCoTuong
         }
         public Point getCoordinatesByLocation(Point p)
         {
-           //Tìm giao điểm có khoảng cách ngắn nhất tới điểm được click
             double minDistance = 1000000;
             int argminX = -1;
             int argminY = -1;
@@ -160,7 +148,6 @@ namespace MyCoTuong
         }
         private double distance(Point p1, Point p2)
         {
-            //khoảng cách 2 điểm
             double x1 = p1.X;
             double y1 = p1.Y;
             double x2 = p2.X;
@@ -169,7 +156,6 @@ namespace MyCoTuong
         }
         public void highlightSelectedUnit(PaintEventArgs e, int selectedID, Color color)
         {
-            //Tìm tọa độ quân cờ cần highlight rồi highlight
             Unit u = Game.unitOnBoard[selectedID];
             Point p = u.pCurrentLocation;
             int x = pCoordinates[p.X, p.Y].X;
@@ -179,7 +165,6 @@ namespace MyCoTuong
         }
         public void highlightAvailableMove(PaintEventArgs e, int selectedID, Color color, int alpha)
         {
-            //Highlight các vị trí có thể đi được
             Unit u = Game.unitOnBoard[selectedID];
             for (int i = 0; i < GameConstants.BoardWidth; i++)
             {
@@ -194,7 +179,6 @@ namespace MyCoTuong
         }
         private void highlightOnPosition(PaintEventArgs e, int x, int y, Color color)
         {
-            //Highlight 1 vị trí nào đó bởi 1 màu nào đó
             Rectangle rec = new Rectangle(x - int_sLength * 3 / 9, y - int_sLength * 3 / 9, int_sLength * 5 / 8, int_sLength * 5 / 8);
             e.Graphics.FillEllipse(new SolidBrush(color), rec);
         }

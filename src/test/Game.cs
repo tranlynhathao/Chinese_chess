@@ -18,19 +18,15 @@ namespace MyCoTuong
         private int blackRemainingTime;
         private bool isGameStart = false;
         public static Unit[] unitOnBoard;
-        //stores Units by their IDs.
         public static int [,] int_IDOnCoordinates;
-        //stores Units by their current coordinates.
         private int int_currentlySelected;
-        //currently selected unit by ID.
         private int int_turn;
-        //turn = 0 means it's red's turn, = 1 means it's black's turn.
 
         private bool isPaused = true;
         private bool isEnded = false;
         private int isChecked = GameConstants.NeitherSide;
         private int intWinner;
-        private int int_NoOfTurnWithoutUnitLoss; //# of moves performed without any pieces eaten -> dung` de check ket qua hoa`.
+        private int int_NoOfTurnWithoutUnitLoss;
         private bool isLastMoveInvalid;
 
         public CoTuongForm MyCoTuongForm;
@@ -179,7 +175,6 @@ namespace MyCoTuong
             Int_NoOfTurnWithoutUnitLoss = 0;
             IntWinner = GameConstants.NotDetermined;
             IsLastMoveInvalid = false;
-            //lượt đầu: đỏ đi
             Int_turn = GameConstants.RedSide;
 
             stackOfStates = new Stack<State>();
@@ -194,7 +189,6 @@ namespace MyCoTuong
         {
             initializeUnitOnBoard();
 
-            // Khởi tạo: tất cả các giao điểm đều không chứa quân nào
             for (int i = 0; i < GameConstants.BoardWidth; i++)
             {
                 for (int j = 0; j < GameConstants.BoardHeight; j++)
@@ -202,7 +196,6 @@ namespace MyCoTuong
                     int_IDOnCoordinates[i, j] = -1;
                 }
             }
-            // Đặt các quân cờ vào các giao điểm
             for (int i = 0; i < GameConstants.MaximumNumberOfUnits; i++)
             {
                 Unit u = unitOnBoard[i];
@@ -233,14 +226,9 @@ namespace MyCoTuong
         }
         #endregion
 
-        #region Di chuyển quân cờ
+        #region
         public void handlePickOrDropEvent(MouseEventArgs e)
         {
-            /*Gồm các bước sau:
-             * 1. Lấy tọa độ (in pixel) mà user vừa click.
-             * 2. Chuyển tọa độ in pixel thành tọa độ bàn cờ.
-             * 3. Thực hiện chọn quân cờ (hoặc đặt quân cờ).
-             */
             Point pInPixel = e.Location;
             Point pInCoordinates = xqBoard.getCoordinatesByLocation(pInPixel);
             if (Int_currentlySelected == GameConstants.Unselected)
@@ -282,16 +270,6 @@ namespace MyCoTuong
 
         private void processMove(Point pInCoordinates)
         {
-            /*Gồm các bước sau:
-             * 1. Kiểm tra xem nước đi có phù hợp không.
-             * 2. Nếu nước đi phù hợp, thực hiện:
-             *      2.1. Ăn quân (nếu có)
-             *      2.2. Update vị trí mới cho quân cờ vừa đi
-             *      2.3. Kết thúc lượt, update lượt và đổi đồng hồ
-             *      2.4. Kiểm tra xem có bên nào bị chiếu không?
-             *      2.5. Kiểm tra xem có hòa theo luật 50 nước không ăn quân không?
-             *      2.6. Lưu trạng thái bàn cờ
-             * 3. Nếu nước đi không hợp lệ, thông báo tại sao không phù hợp*/
             Unit u = unitOnBoard[Int_currentlySelected];
             if (u.int_side == Int_turn)
             {
@@ -314,9 +292,6 @@ namespace MyCoTuong
        
         private void removeOldUnitIfExist(Point pInCoordinates)
         {
-            /* 1. Xóa quân cờ bị ăn khỏi bàn cờ. 
-             * 2. Reset lại số nước đi không ăn quân (dùng để check hòa)
-             */
             int intChecked = int_IDOnCoordinates[pInCoordinates.X, pInCoordinates.Y];
             if (intChecked != GameConstants.Unselected)
             {
@@ -353,7 +328,7 @@ namespace MyCoTuong
         }
         #endregion
 
-        #region Phản hồi tới người chơi
+        #region
         private void notifyInvalidMove()
         {
             IsLastMoveInvalid = true;
@@ -376,10 +351,9 @@ namespace MyCoTuong
         }
         #endregion
 
-        #region Xử lý yêu cầu bên ngoài
+        #region
         public void resumeGame()
         {
-            //Chuyển trạng thái cho game, set lại text ở button, điều chỉnh đồng hồ.
             IsPaused = false;
             MyCoTuongForm.buttonPauseSetText("Pause");
             resumeTimer();
@@ -424,8 +398,7 @@ namespace MyCoTuong
         }
         #endregion
 
-        #region Kiểm tra trạng thái chiếu tướng, thắng thua. Kết thúc game.
-
+        #region
         public bool isGameEndByOneSideHasNoMove()
         {
             bool ended = true;
@@ -456,9 +429,6 @@ namespace MyCoTuong
         
         public static bool isGameChecked(int param_side)
         {
-            //Kiểm tra xem 1 bên nào đó (truyền bởi tham số) có bị chiếu hay không?
-            //1. Dựa vào tham số tìm ra con tướng
-            //2. Kiểm tra xem có quân nào của đối phương có thể ăn được tướng không?
             int startIndex = -1;
             Unit uGeneral;
             if (param_side == GameConstants.RedSide)
@@ -485,10 +455,6 @@ namespace MyCoTuong
 
         public void endGame()
         {
-            /* 1. Dừng đồng hồ
-             * 2. Tính xem người chơi nào thắng (hoặc hòa). Người thắng là người đang không trong lượt.
-             * 3. Thông báo người chiến thắng.
-             */
             string str_winner;
             //1
             MyCoTuongForm.redTimerStop();
@@ -533,8 +499,6 @@ namespace MyCoTuong
         
         public static int isPossed(int x, int y)
         {
-            /* Kiểm tra xem 1 vị trí nào đó có quân nào đứng trên đó không?
-             * Trả về 0 nếu là quân đỏ, 1 nếu là quân đen, -1 nếu không có*/
             try
             {
                 if (int_IDOnCoordinates[x, y] == GameConstants.NoID) return GameConstants.NeitherSide;
@@ -550,7 +514,7 @@ namespace MyCoTuong
             }
         }
 
-        #region Xử lý undo
+        #region
         private void saveState(){
             int[] unitPosX = new int[GameConstants.MaximumNumberOfUnits];
             int[] unitPosY = new int[GameConstants.MaximumNumberOfUnits];
@@ -582,10 +546,6 @@ namespace MyCoTuong
 
         public void undo()
         {
-            /* Nếu còn có thể undo, thì tiến hành undo:
-             * Lấy tất cả các trạng thái trước đó (vị trí các quân, lượt chơi,...)
-             * Nếu không thể undo thì thông báo ra
-             */
             if (stackOfStates.Count > 1)
             {
                 stackOfStates.Pop();
@@ -628,7 +588,7 @@ namespace MyCoTuong
 
         #endregion
 
-        #region Xử lý lượt, thời gian chơi
+        #region
         public void setTimeLimit()
         {
             RedRemainingTime = GameConstants.Res_fullTimeAllowedRed;
